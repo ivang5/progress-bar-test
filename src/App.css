@@ -1,0 +1,41 @@
+#root {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 1;
+  height: 0.5rem;
+  background-color: #4d37b8;
+  transition: width 0.3s;
+  border-radius: 0.15rem;
+}
+
+.read-time {
+  position: absolute;
+  top: 2.5rem;
+  left: 2.5rem;
+  padding: 1rem 1.5rem 1.3rem;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  font-size: 1.6rem;
+}
+
+.posts {
+  padding-top: 3.5rem;
+}
+
+.post {
+  margin-top: 3rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 0.2rem solid rgba(0, 0, 0, 0.4);
+}
+
+.post__title {
+  text-transform: capitalize;
+}
