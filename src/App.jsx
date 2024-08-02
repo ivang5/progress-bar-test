@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
+import useProgressBar from "./hooks/useProgressBar";
 import "./App.css";
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [readTime, setReadTime] = useState(0);
-  const [progress, setProgress] = useState("");
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const progressBar = useProgressBar(dataLoaded);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((res) => res.json())
       .then((data) => setPosts(data));
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -31,21 +30,13 @@ function App() {
     if (posts.length > 0) {
       const totalWords = calculateTotalWords();
       setReadTime(Math.round(totalWords / 265));
-      handleScroll();
+      setDataLoaded(true);
     }
   }, [posts]);
 
-  const handleScroll = () => {
-    const scrollBarPos = window.scrollY;
-    const scrollBarSize = window.innerHeight;
-    const totalSize = document.body.clientHeight;
-
-    setProgress(`${((scrollBarPos + scrollBarSize) / totalSize) * 100}%`);
-  };
-
   return (
     <>
-      <div className="progress-bar" style={{ width: progress }}></div>
+      <div className="progress-bar" style={{ width: progressBar }}></div>
       <span className="read-time">{readTime} min read</span>
       <div className="posts">
         {posts.map((post) => (
