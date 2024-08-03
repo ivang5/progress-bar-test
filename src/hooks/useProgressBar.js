@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const useProgressBar = (dataLoaded) => {
   const [progress, setProgress] = useState("");
@@ -11,13 +11,13 @@ const useProgressBar = (dataLoaded) => {
     }
   }, [dataLoaded]);
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const scrollBarPos = window.scrollY;
     const scrollBarSize = window.innerHeight;
     const totalSize = document.body.clientHeight;
 
     setProgress(`${((scrollBarPos + scrollBarSize) / totalSize) * 100}%`);
-  };
+  }, []);
 
   return progress;
 };
